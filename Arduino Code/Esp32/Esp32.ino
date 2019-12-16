@@ -1,125 +1,99 @@
-/*
- ESP32 House Automation
- 
- learnelectronics
- 14 SEPT 2017
- 
- www.youtube.com/c/learnelectronics
- arduino0169@gmail.com
- 
- */
- 
-#include <WiFi.h>
- 
-const char* ssid     = "ZONG MBB-E5573-AE26";
-const char* password = "58688303";
- 
-WiFiServer server(80);
- 
-void setup()
-{
-    Serial.begin(115200);
-    pinMode(5, OUTPUT);      // set the LED pin mode
-    pinMode(12,OUTPUT);
-    pinMode(13,OUTPUT);
-   
- 
-    delay(10);
- 
-    // We start by connecting to a WiFi network
- 
-    Serial.println();
-    Serial.println();
-    Serial.print("Connecting to ");
-    Serial.println(ssid);
- 
-    WiFi.begin(ssid, password);
- 
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
-    }
- 
-    Serial.println("");
-    Serial.println("WiFi connected.");
-    Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
-   
-    server.begin();
- 
+#include <WebServer.h>
+#include "index_html.h"
+
+#define LEDn    12
+//#define LEDpwm   2
+
+#define LEDC_CHANNEL_0     0
+#define LEDC_TIMER_13_BIT  13
+#define LEDC_BASE_FREQ     5000
+#define LED_PIN            2
+
+
+//Define name of the Wifi & password for creating an access point
+const char* ssid = "esp32";           //"ZONG MBB-E5573-AE26";
+//!!!Your password MUST be a minimum of 8 characters...otherwise neither password nor ssid will be accepted -> default or old ssid&pwd will show up!!! 
+const char* password = "12345678";    //"58688303";
+
+
+WebServer server(80);
+
+bool led;
+int pwm;
+int pwmCount;
+
+void ledON(){
+  led=1;
 }
- 
-int value = 0;
- 
-void loop(){
- WiFiClient client = server.available();   // listen for incoming clients
- 
-  if (client) {                             // if you get a client,
-    Serial.println("New Client.");           // print a message out the serial port
-    String currentLine = "";                // make a String to hold incoming data from the client
-    while (client.connected()) {            // loop while the client's connected
-      if (client.available()) {             // if there's bytes to read from the client,
-        char c = client.read();             // read a byte, then
-        Serial.write(c);                    // print it out the serial monitor
-        if (c == '\n') {                    // if the byte is a newline character
- 
-          // if the current line is blank, you got two newline characters in a row.
-          // that's the end of the client HTTP request, so send a response:
-          if (currentLine.length() == 0) {
-            // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
-            // and a content-type so the client knows what's coming, then a blank line:
-            client.println("HTTP/1.1 200 OK");
-            client.println("Content-type:text/html");
-            client.println();
- 
-            // the content of the HTTP response follows the header:
-            client.print("Click <a href=\"/L\">here</a> to turn KITCHEN on.<br>");
-            client.print("Click <a href=\"/H\">here</a> to turn KITCHEN off.<br>");
-           
- 
-            client.print("Click <a href=\"/I\">here</a> to turn WALKWAY on.<br>");
-            client.print("Click <a href=\"/J\">here</a> to turn WALKWAY off.<br>");
- 
-            client.print("Click <a href=\"/O\">here</a> to turn BACK DOOR on.<br>");
-            client.print("Click <a href=\"/P\">here</a> to turn BACK DOOR off.<br>");
-           
- 
-            // The HTTP response ends with another blank line:
-            client.println();
-            // break out of the while loop:
-            break;
-          } else {    // if you got a newline, then clear currentLine:
-            currentLine = "";
-          }
-        } else if (c != '\r') {  // if you got anything else but a carriage return character,
-          currentLine += c;      // add it to the end of the currentLine
-        }
- 
-        // Check to see if the client request was "GET /H" or "GET /L":
-        if (currentLine.endsWith("GET /H")) {
-          digitalWrite(5, HIGH);               // GET /H turns the LED on
-        }
-        if (currentLine.endsWith("GET /L")) {
-          digitalWrite(5, LOW);                // GET /L turns the LED off
-        }
- 
-        if (currentLine.endsWith("GET /I")) {
-          digitalWrite(12, HIGH);               // GET /H turns the LED on
-        }
-        if (currentLine.endsWith("GET /J")) {
-          digitalWrite(12, LOW);                // GET /L turns the LED off
-        }
- 
-        if (currentLine.endsWith("GET /O")) {
-          digitalWrite(13, HIGH);               // GET /H turns the LED on
-        }
-        if (currentLine.endsWith("GET /P")) {
-          digitalWrite(13, LOW);                // GET /L turns the LED off
-        }
-      }
-    }
-    // close the connection:
-    client.stop();
-    Serial.println("Client Disconnected.");
-  }
+
+void ledOFF(){
+  led=0;  
+}
+//pwm functions - if pwm is set to 1/-1 it will in-/decrease pwmCounter in loop()
+void plus(){
+  pwm=3;  
+}
+
+void minus(){
+  pwm=-3;  
+}
+
+void stopPWM(){
+  pwm=0;  
+}
+//----------------------------------------------------------------------------------
+void handleRoot(){
+  server.send(200, "text/html", webpage);  
+}
+
+void ledcAnalogWrite(uint8_t channel, uint32_t value, uint32_t valueMax = 255) 
+{
+  uint32_t duty = (8191 / valueMax) * min(value, valueMax);
+  ledcWrite(channel, duty);
+}
+
+void setup() {
+  //Setup Analog________________
+  ledcSetup(LEDC_CHANNEL_0, LEDC_BASE_FREQ, LEDC_TIMER_13_BIT);
+  ledcAttachPin(LED_PIN, LEDC_CHANNEL_0);
+  //Setup Serial________________
+  Serial.begin(9600);
+  //Set LED pins to output________________
+  pinMode(LEDn,OUTPUT);
+  //pinMode(LEDpwm,OUTPUT);
+  //Wifi as access point__________________
+  WiFi.mode(WIFI_AP);
+  IPAddress apLocalIp(2,2,2,2);
+  IPAddress apSubnetMask(255,255,255,0);
+  WiFi.softAPConfig(apLocalIp,apLocalIp,apSubnetMask);
+  WiFi.softAP(ssid, password);
+  //Server________________________________
+  server.begin();
+  server.on("/", handleRoot);
+  server.on("/LEDon", ledON);     
+  server.on("/LEDoff", ledOFF);   
+  server.on("/minus", minus);   
+  server.on("/plus", plus);   
+  server.on("/stop", stopPWM);   
+  //initialize variables__________________
+  pwm=0;
+  pwmCount=0;
+  led=0;
+}
+
+void loop() {
+  server.handleClient();
+  //turns LED ON/OFF (GPIO 2/D4)
+  digitalWrite(LEDn, led);
+  
+  //in-/decreases pwmCount(=brightness)
+  pwmCount+=pwm;
+  //to hold pwmCount in it's range (min 0 - max 1024)
+  if(pwmCount>1024)pwmCount=1024;
+  if(pwmCount<0)pwmCount=0;
+  //Serial.println(pwmCount);
+  //sets pwmCount to PWM value of GPIO 12/D6
+  //analogWrite(LEDpwm, pwmCount);
+  ledcAnalogWrite(LEDC_CHANNEL_0, pwmCount);
+  delay(10);
 }
