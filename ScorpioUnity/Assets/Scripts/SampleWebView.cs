@@ -54,7 +54,7 @@ public class SampleWebView : MonoBehaviour
             },
             //ua: "custom user agent string",
             enableWKWebView: true);
-        webViewObject.SetMargins(5, 100, 5, Screen.height / 4);
+        webViewObject.SetMargins(Screen.width / 4, Screen.height / 6, Screen.width/4, Screen.height / 50);
         webViewObject.SetVisibility(true);
         if (Url.StartsWith("http")) {
             webViewObject.LoadURL(Url.Replace(" ", "%20"));
