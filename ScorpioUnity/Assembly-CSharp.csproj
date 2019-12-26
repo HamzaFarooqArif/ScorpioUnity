@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CentralClass.cs" />
     <Compile Include="Assets\Scripts\SampleCustomHeader.cs" />
     <Compile Include="Assets\Scripts\SampleWebView.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
