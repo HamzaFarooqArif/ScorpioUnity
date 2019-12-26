@@ -20,15 +20,24 @@
 
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SampleWebView : MonoBehaviour
 {
     public string Url;
     public GUIText status;
     WebViewObject webViewObject;
-
+    public Button btnGo;
+    public Button btnGoBack;
+    public InputField iFURL;
     IEnumerator Start()
     {
+        btnGo = GameObject.Find("btnGo").GetComponent<Button>();
+        btnGoBack = GameObject.Find("btnGoBack").GetComponent<Button>();
+        btnGo.onClick.AddListener(delegate { btnGoClick(); });
+        btnGoBack.onClick.AddListener(delegate { btnGoBackClick(); });
+        iFURL = GameObject.Find("IFURL").GetComponent<InputField>();
+
         webViewObject = (new GameObject("WebViewObject")).AddComponent<WebViewObject>();
         webViewObject.Init(
             cb: (msg) =>
@@ -54,36 +63,48 @@ public class SampleWebView : MonoBehaviour
             },
             //ua: "custom user agent string",
             enableWKWebView: true);
-        webViewObject.SetMargins(Screen.width / 4, Screen.height / 6, Screen.width/4, Screen.height / 50);
+        webViewObject.SetMargins(Screen.width / 4, Screen.height / 4, Screen.width/4, Screen.height / 50);
         webViewObject.SetVisibility(true);
-        if (Url.StartsWith("http")) {
-            webViewObject.LoadURL(Url.Replace(" ", "%20"));
-        } else {
-            var exts = new string[]{
-                ".jpg",
-                ".js",
-                ".html"  // should be last
-            };
-            foreach (var ext in exts) {
-                var url = Url.Replace(".html", ext);
-                var src = System.IO.Path.Combine(Application.streamingAssetsPath, url);
-                var dst = System.IO.Path.Combine(Application.persistentDataPath, url);
-                byte[] result = null;
-                if (src.Contains("://")) {  // for Android
-                    var www = new WWW(src);
-                    yield return www;
-                    result = www.bytes;
-                } else {
-                    result = System.IO.File.ReadAllBytes(src);
-                }
-                System.IO.File.WriteAllBytes(dst, result);
-                if (ext == ".html") {
-                    webViewObject.LoadURL("file://" + dst.Replace(" ", "%20"));
-                    break;
-                }
-            }
-        }
+        //webViewObject.LoadURL("https://www.google.com/");
+        
+        //if (Url.StartsWith("http")) {
+        //    webViewObject.LoadURL(Url.Replace(" ", "%20"));
+        //} else {
+        //    var exts = new string[]{
+        //        ".jpg",
+        //        ".js",
+        //        ".html"  // should be last
+        //    };
+        //    foreach (var ext in exts) {
+        //        var url = Url.Replace(".html", ext);
+        //        var src = System.IO.Path.Combine(Application.streamingAssetsPath, url);
+        //        var dst = System.IO.Path.Combine(Application.persistentDataPath, url);
+        //        byte[] result = null;
+        //        if (src.Contains("://")) {  // for Android
+        //            var www = new WWW(src);
+        //            yield return www;
+        //            result = www.bytes;
+        //        } else {
+        //            result = System.IO.File.ReadAllBytes(src);
+        //        }
+        //        System.IO.File.WriteAllBytes(dst, result);
+        //        if (ext == ".html") {
+        //            webViewObject.LoadURL("file://" + dst.Replace(" ", "%20"));
+        //            break;
+        //        }
+        //    }
+        //}
         yield break;
+    }
+
+    public void btnGoClick()
+    {
+        webViewObject.LoadURL("http://"+iFURL.text);
+    }
+    public void btnGoBackClick()
+    {
+        if(webViewObject.CanGoBack())
+        webViewObject.GoBack();
     }
 
     private void OnEnable()
