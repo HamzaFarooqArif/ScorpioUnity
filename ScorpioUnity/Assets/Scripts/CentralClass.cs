@@ -6,15 +6,21 @@ using UnityEngine;
 
 public class CentralClass : MonoBehaviour
 {
+    public int ch1Min;
+    public int ch1Max;
+    public int ch2Min;
+    public int ch2Max;
+
     public List<int> channelList;
     int chCount;
     bool isChUpdated;
     public string iPAddress;
     WebClient client;
+    public bool isConnected;
     string response;
+
     void Start()
     {
-        iPAddress = "192.168.8.103";
         client = new WebClient();
 
         channelList = new List<int>();
@@ -38,7 +44,7 @@ public class CentralClass : MonoBehaviour
 
     public void updateChannel(int idx, int val)
     {
-        if(idx < chCount)
+        if(idx < chCount && channelList[idx] != val)
         {
             channelList[idx] = val;
             isChUpdated = true;
