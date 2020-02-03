@@ -51,10 +51,23 @@ public class ControlSliderScript : MonoBehaviour, IPointerDownHandler, IPointerU
     {
         if(slider.name.Equals("LRSlider"))
         {
-            centralClass.updateChannel(0, (int)slider.value);
+            if(slider.value > (slider.minValue+slider.maxValue)/2)
+            {
+                centralClass.updateChannel(0, (int)slider.value);
+                //centralClass.updateChannel(1, ((int)(slider.minValue + slider.maxValue) / 2) - (int)slider.value);
+            }
+            else
+            {
+                //centralClass.updateChannel(0, ((int)(slider.minValue + slider.maxValue) / 2) - (int)slider.value);
+                centralClass.updateChannel(1, (int)slider.maxValue - (int)slider.value);
+                Debug.Log((int)slider.maxValue - (int)slider.value);
+            }
+            
+
         }
         else if (slider.name.Equals("FBSlider"))
         {
+            centralClass.updateChannel(0, (int)slider.value);
             centralClass.updateChannel(1, (int)slider.value);
         }
 
@@ -70,9 +83,11 @@ public class ControlSliderScript : MonoBehaviour, IPointerDownHandler, IPointerU
         if (slider.name.Equals("LRSlider"))
         {
             centralClass.updateChannel(0, (int)slider.value);
+            centralClass.updateChannel(1, (int)slider.value);
         }
         else if (slider.name.Equals("FBSlider"))
         {
+            centralClass.updateChannel(0, (int)slider.value);
             centralClass.updateChannel(1, (int)slider.value);
         }
     }

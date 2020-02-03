@@ -21,6 +21,7 @@ public class CentralClass : MonoBehaviour
 
     void Start()
     {
+        Quaternion q = Quaternion.Euler(285, 320, 50);
         client = new WebClient();
 
         channelList = new List<int>();

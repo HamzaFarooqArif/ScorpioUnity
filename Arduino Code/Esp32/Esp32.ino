@@ -1,5 +1,6 @@
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
+#include <ESP32_Servo.h>
 
 #define LEDC_TIMER_13_BIT  13
 #define LEDC_BASE_FREQ     5000
@@ -15,6 +16,9 @@ const int chCount = 9;
 int paramArray[chCount] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 int pinsArray[chCount] = {15, 2, 4, 16, 17, 5, 18, 19, 21};
 
+Servo ch1Servo;
+Servo ch2Servo;
+
 void setupAnalogWrite()
 {
   for(int i = 0; i < chCount; i++)
@@ -22,6 +26,12 @@ void setupAnalogWrite()
     ledcSetup(i, LEDC_BASE_FREQ, LEDC_TIMER_13_BIT);
     ledcAttachPin(pinsArray[i], i);
   }
+}
+
+void setupServoWrite()
+{
+  ch1Servo.attach(pinsArray[0]);
+  ch2Servo.attach(pinsArray[1]);
 }
 
 void ledcAnalogWrite(uint8_t channel, uint32_t value, uint32_t valueMax = 255) {
@@ -48,9 +58,15 @@ void writeValue()
   }
 }
 
+void writeServoValue()
+{
+  ch1Servo.write(paramArray[0]);
+  ch2Servo.write(paramArray[1]);
+}
+
 void setup(){
-  setupAnalogWrite();
-  
+  //setupAnalogWrite();
+  setupServoWrite();  
   Serial.begin(115200);
 
   for(int i = 0; i < 9; i++)
@@ -92,7 +108,8 @@ void setup(){
         //Serial.println("------");
     }
     
-    writeValue();
+    //writeValue();
+    writeServoValue();
     printArray();
  
     request->send(200, "text/plain", "message received");

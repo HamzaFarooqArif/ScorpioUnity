@@ -30,10 +30,10 @@ public class ConfirmButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         isConnected = false;
 
         inputField.text = "192.168.8.103";
-        ch1Min.text = "-128";
-        ch1Max.text = "127";
-        ch2Min.text = "-128";
-        ch2Max.text = "127";
+        ch1Min.text = "0";
+        ch1Max.text = "100";
+        ch2Min.text = "0";
+        ch2Max.text = "100";
 
     }
 

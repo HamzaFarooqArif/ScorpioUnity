@@ -25,17 +25,21 @@ public class ButtonScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if(this.gameObject.name.Equals("btnLeft"))
         {
             centralClass.updateChannel(0, centralClass.ch1Min);
+            centralClass.updateChannel(1, centralClass.ch2Max);
         }
         else if (this.gameObject.name.Equals("btnRight"))
         {
             centralClass.updateChannel(0, centralClass.ch1Max);
+            centralClass.updateChannel(1, centralClass.ch2Min);
         }
         else if (this.gameObject.name.Equals("btnFwd"))
         {
+            centralClass.updateChannel(0, centralClass.ch1Max);
             centralClass.updateChannel(1, centralClass.ch2Max);
         }
         else if (this.gameObject.name.Equals("btnBack"))
         {
+            centralClass.updateChannel(0, centralClass.ch1Min);
             centralClass.updateChannel(1, centralClass.ch2Min);
         }
     }
@@ -45,17 +49,21 @@ public class ButtonScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (this.gameObject.name.Equals("btnLeft"))
         {
             centralClass.updateChannel(0, (centralClass.ch1Min + centralClass.ch1Max)/2);
+            centralClass.updateChannel(1, (centralClass.ch2Min + centralClass.ch2Max) / 2);
         }
         else if (this.gameObject.name.Equals("btnRight"))
         {
             centralClass.updateChannel(0, (centralClass.ch1Min + centralClass.ch1Max) / 2);
+            centralClass.updateChannel(1, (centralClass.ch2Min + centralClass.ch2Max) / 2);
         }
         else if (this.gameObject.name.Equals("btnFwd"))
         {
+            centralClass.updateChannel(0, (centralClass.ch1Min + centralClass.ch1Max) / 2);
             centralClass.updateChannel(1, (centralClass.ch2Min + centralClass.ch2Max) / 2);
         }
         else if (this.gameObject.name.Equals("btnBack"))
         {
+            centralClass.updateChannel(0, (centralClass.ch1Min + centralClass.ch1Max) / 2);
             centralClass.updateChannel(1, (centralClass.ch2Min + centralClass.ch2Max) / 2);
         }
     }
