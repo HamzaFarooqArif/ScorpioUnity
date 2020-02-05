@@ -1,12 +1,14 @@
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
-#include <ESP32_Servo.h>
+#include <ESP32Servo.h>
 
 #define LEDC_TIMER_13_BIT  13
 #define LEDC_BASE_FREQ     5000
  
-const char* ssid = "ZONG MBB-E5573-AE26";
-const char* password =  "58688303";
+//const char* ssid = "ZONG MBB-E5573-AE26";
+//const char* password =  "58688303";
+const char* ssid = "EVO-Charji-BF2C";
+const char* password =  "HJhV7473";
 
 char out_str[40];  
 
@@ -30,8 +32,8 @@ void setupAnalogWrite()
 
 void setupServoWrite()
 {
-  ch1Servo.attach(pinsArray[0]);
-  ch2Servo.attach(pinsArray[1]);
+  ch1Servo.attach(pinsArray[0], 530, 2200);
+  ch2Servo.attach(pinsArray[1], 530, 2200);
 }
 
 void ledcAnalogWrite(uint8_t channel, uint32_t value, uint32_t valueMax = 255) {

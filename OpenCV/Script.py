@@ -3,7 +3,7 @@ import urllib
 import cv2
 import numpy as np
 
-url='http://192.168.8.100/cam-hi.jpg'
+url='http://192.168.8.101/cam-hi.jpg'
 
 while True:
     imgResp=urllib.request.urlopen(url)

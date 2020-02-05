@@ -108,6 +108,7 @@ void setup()
     cfg.setResolution(hiRes);
     cfg.setBufferCount(2);
     cfg.setJpeg(80);
+    //cfg.setContrast(2);
 
     bool ok = Camera.begin(cfg);
     Serial.println(ok ? "CAMERA OK" : "CAMERA FAIL");
