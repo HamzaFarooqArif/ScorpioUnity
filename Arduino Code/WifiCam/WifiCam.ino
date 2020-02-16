@@ -2,8 +2,8 @@
 #include <WebServer.h>
 #include <WiFi.h>
 
-const char* WIFI_SSID = "ZONG MBB-E5573-AE26";
-const char* WIFI_PASS = "58688303";
+const char* WIFI_SSID = "EVO-Charji-BF2C";
+const char* WIFI_PASS = "HJhV7473";
 
 WebServer server(80);
 
