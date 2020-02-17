@@ -2,8 +2,8 @@
 #include <WebServer.h>
 #include <WiFi.h>
 
-const char* WIFI_SSID = "EVO-Charji-BF2C";
-const char* WIFI_PASS = "HJhV7473";
+const char* WIFI_SSID = "esp32";
+const char* WIFI_PASS = "12345678";
 
 WebServer server(80);
 
@@ -117,9 +117,13 @@ void setup()
   WiFi.persistent(false);
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASS);
+  Serial.print("Connecting to ");
+  Serial.print(WIFI_SSID);  
   while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
     delay(500);
   }
+  Serial.println(".");
 
   Serial.print("http://");
   Serial.println(WiFi.localIP());
