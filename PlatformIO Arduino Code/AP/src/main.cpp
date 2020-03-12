@@ -2,39 +2,66 @@
 #include "esp_wifi.h"
 #include <WiFiClient.h>
 #include <WiFiAP.h>
+#include <ESP32Servo.h>
 
-tcpip_adapter_sta_list_t adapter_sta_list;
-
-char* message = "";
-
-#define LED_BUILTIN 2   // Set the GPIO pin where you connected your test LED or comment this line out if your dev board has a built-in LED
+#define LED_BUILTIN 2
 
 // Set these to your desired credentials.
 const char *ssid = "esp32";
 const char *password = "12345678";
 
+tcpip_adapter_sta_list_t adapter_sta_list;
+char* message = "";
+
+const int chCount = 9;
+int paramArray[chCount] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+int pinsArray[chCount] = {15, 2, 4, 16, 17, 5, 18, 19, 21};
+
+#define LEDC_TIMER_13_BIT  13
+#define LEDC_BASE_FREQ     5000
+Servo ch1Servo;
+Servo ch2Servo;
+
 WiFiServer server(80);
 
-char* getCameraIp()
+void setupAnalogWrite()
 {
-  byte camMac[] = { 0xA4, 0xCF, 0x12, 0x9B, 0x31, 0xCC };
-  char* result = "";
-  for (int i = 0; i < adapter_sta_list.num; i++){
-    tcpip_adapter_sta_info_t station = adapter_sta_list.sta[i];
-    for(int i = 0; i< 6; i++){
-      if(station.mac[i] != camMac[i])
-      {
-        break;
-      }
-      if(i == 5)
-      {
-        return ip4addr_ntoa(&(station.ip));
-      }
-    }
+  for(int i = 0; i < chCount; i++)
+  {
+    ledcSetup(i, LEDC_BASE_FREQ, LEDC_TIMER_13_BIT);
+    ledcAttachPin(pinsArray[i], i);
   }
-  return result;
 }
-
+void setupServoWrite()
+{
+  ch1Servo.attach(pinsArray[0], 530, 2200); //ch1Servo.attach(pinsArray[0], 1000, 2000);
+  ch2Servo.attach(pinsArray[1], 530, 2200); //ch2Servo.attach(pinsArray[1], 1000, 2000);
+}
+void ledcAnalogWrite(uint8_t channel, uint32_t value, uint32_t valueMax = 255) {
+  uint32_t duty = (8191 / valueMax) * min(value, valueMax);
+  ledcWrite(channel, duty);
+}
+void printArray()
+{
+  for(int i = 0; i < chCount; i++)
+    {
+      String result = String(paramArray[i]);
+      Serial.print(result + " ");
+    }
+    Serial.println();
+}
+void writeValue()
+{
+  for(int i = 0; i < chCount; i++)
+  {
+    ledcAnalogWrite(i, paramArray[i]);
+  }
+}
+void writeServoValue()
+{
+  ch1Servo.write(paramArray[0]);
+  ch2Servo.write(paramArray[1]);
+}
 void refreshStaList()
 {
   wifi_sta_list_t wifi_sta_list;
@@ -43,7 +70,6 @@ void refreshStaList()
   esp_wifi_ap_get_sta_list(&wifi_sta_list);
   tcpip_adapter_get_sta_list(&wifi_sta_list, &adapter_sta_list);
 }
-
 void printStaList()
 {
   for (int i = 0; i < adapter_sta_list.num; i++) {
@@ -67,30 +93,33 @@ void printStaList()
  
   Serial.println("-----------");
 }
-
-void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);
-  Serial.begin(115200);
-  
-  Serial.println();
-  Serial.println("Configuring access point...");
-  WiFi.softAP(ssid, password);
-  IPAddress myIP = WiFi.softAPIP();
-  Serial.print("AP IP address: ");
-  Serial.println(myIP);
-  server.begin();
-  Serial.println("Server started");
+char* getCameraIp()
+{
+  refreshStaList();
+  byte camMac[] = { 0xA4, 0xCF, 0x12, 0x9B, 0x31, 0xCC };
+  char* result = "";
+  for (int i = 0; i < adapter_sta_list.num; i++){
+    tcpip_adapter_sta_info_t station = adapter_sta_list.sta[i];
+    for(int i = 0; i< 6; i++){
+      if(station.mac[i] != camMac[i])
+      {
+        break;
+      }
+      if(i == 5)
+      {
+        return ip4addr_ntoa(&(station.ip));
+      }
+    }
+  }
+  return result;
 }
- 
-void loop() {
-  //refreshStaList();
-  //printStaList(); 
-  //delay(5000);
 
+void handleClient()
+{
   WiFiClient client = server.available();   // listen for incoming clients
   
   if (client) {                             // if you get a client,
-    Serial.println("New Client.");           // print a message out the serial port
+    //Serial.println("New Client.");           // print a message out the serial port
     String currentLine = "";                // make a String to hold incoming data from the client
     while (client.connected()) {            // loop while the client's connected
       if (client.available()) {             // if there's bytes to read from the client,
@@ -111,6 +140,7 @@ void loop() {
             //client.print("Click <a href=\"/H\">here</a> to turn ON the LED.<br>");
             //client.print("Click <a href=\"/L\">here</a> to turn OFF the LED.<br>");
             client.print(message);
+            Serial.println(message);
             message = "";
             
             // The HTTP response ends with another blank line:
@@ -125,21 +155,52 @@ void loop() {
         }
 
         // Check to see if the client request was "GET /H" or "GET /L":
-        if (currentLine.endsWith("GET /H")) {
+        /*if (currentLine.endsWith("GET /H")) {
           digitalWrite(LED_BUILTIN, HIGH);               // GET /H turns the LED on
         }
         if (currentLine.endsWith("GET /L")) {
           digitalWrite(LED_BUILTIN, LOW);                // GET /L turns the LED off
-        }
-        if (currentLine.endsWith("GET /camIp")) {
-          refreshStaList();
+        }*/
+        if (currentLine.endsWith("GET /camip")) {
+          //refreshStaList();
           //printStaList();
+          
           message = getCameraIp();
         }
       }
     }
+  }
+}
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(115200);
+
+  setupServoWrite();
+  for(int i = 0; i < 9; i++)
+  {
+    pinMode(pinsArray[i], OUTPUT);
+  }
+  
+  Serial.println();
+  Serial.println("Configuring access point...");
+  WiFi.softAP(ssid, password);
+  IPAddress myIP = WiFi.softAPIP();
+  Serial.print("AP IP address: ");
+  Serial.println(myIP);
+  server.begin();
+  Serial.println("Server started");
+}
+
+
+ 
+void loop() {
+  //refreshStaList();
+  //printStaList(); 
+  //delay(1000);
+  handleClient();
+  
     // close the connection:
     //client.stop();
     //Serial.println("Client Disconnected.");
-  }
+  
 }

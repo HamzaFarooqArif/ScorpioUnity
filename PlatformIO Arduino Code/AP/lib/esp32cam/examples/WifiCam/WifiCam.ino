@@ -2,10 +2,8 @@
 #include <WebServer.h>
 #include <WiFi.h>
 
-#define LED_BUILTIN 4
-
-const char* WIFI_SSID = "esp32";
-const char* WIFI_PASS = "12345678";
+const char* WIFI_SSID = "my-ssid";
+const char* WIFI_PASS = "my-pass";
 
 WebServer server(80);
 
@@ -98,19 +96,8 @@ void handleMjpeg()
   Serial.printf("STREAM END %dfrm %0.2ffps\n", res, 1000.0 * res / duration);
 }
 
-void flashOn()
-{
-  digitalWrite(LED_BUILTIN, HIGH);
-}
-
-void flashOff()
-{
-  digitalWrite(LED_BUILTIN, LOW);
-}
-
 void setup()
 {
-  pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(115200);
   Serial.println();
 
@@ -121,7 +108,6 @@ void setup()
     cfg.setResolution(hiRes);
     cfg.setBufferCount(2);
     cfg.setJpeg(80);
-    //cfg.setContrast(2);
 
     bool ok = Camera.begin(cfg);
     Serial.println(ok ? "CAMERA OK" : "CAMERA FAIL");
@@ -130,13 +116,9 @@ void setup()
   WiFi.persistent(false);
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASS);
-  Serial.print("Connecting to ");
-  Serial.print(WIFI_SSID);  
   while (WiFi.status() != WL_CONNECTED) {
-    Serial.print(".");
     delay(500);
   }
-  Serial.println(".");
 
   Serial.print("http://");
   Serial.println(WiFi.localIP());
@@ -150,19 +132,11 @@ void setup()
   server.on("/cam-hi.jpg", handleJpgHi);
   server.on("/cam.jpg", handleJpg);
   server.on("/cam.mjpeg", handleMjpeg);
-  server.on("/cam.flashon", flashOn);
-  server.on("/cam.flashoff", flashOff);
-
 
   server.begin();
 }
 
 void loop()
 {
-  if(WiFi.status() != WL_CONNECTED)
-  {
-    ESP.restart();
-  }
-
   server.handleClient();
 }
