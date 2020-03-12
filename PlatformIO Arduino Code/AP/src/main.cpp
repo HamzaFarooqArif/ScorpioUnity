@@ -34,8 +34,10 @@ void setupAnalogWrite()
 }
 void setupServoWrite()
 {
-  ch1Servo.attach(pinsArray[0], 530, 2200); //ch1Servo.attach(pinsArray[0], 1000, 2000);
-  ch2Servo.attach(pinsArray[1], 530, 2200); //ch2Servo.attach(pinsArray[1], 1000, 2000);
+  ch1Servo.setPeriodHertz(50);
+  ch2Servo.setPeriodHertz(50);
+  ch1Servo.attach(pinsArray[0], 1000, 2000); //ch1Servo.attach(pinsArray[0], 530, 2200);
+  ch2Servo.attach(pinsArray[1], 1000, 2000); //ch2Servo.attach(pinsArray[1], 530, 2200);
 }
 void ledcAnalogWrite(uint8_t channel, uint32_t value, uint32_t valueMax = 255) {
   uint32_t duty = (8191 / valueMax) * min(value, valueMax);
@@ -163,6 +165,7 @@ void parseArgs(String str)
       {
         paramArray[param.toInt()] = value.toInt();
       }
+      writeServoValue();
       printArray();
     }
   }
