@@ -113,6 +113,60 @@ char* getCameraIp()
   }
   return result;
 }
+void parseArgs(String str)
+{
+  if(str.startsWith("GET /?"))
+  {
+    int i;
+    String argsStr = "";
+    for(i = 5; i < str.length(); i++)
+    {
+      if(str[i] == ' ') break;
+    }
+    argsStr = str.substring(6, i);
+
+    if(argsStr.length() > 0)
+    {
+      String param = "";
+      String value = "";
+
+      bool incParam = true;
+      bool incValue = false;
+      for(int i = 0; i < argsStr.length(); i++)
+      {
+        if(argsStr[i] == '=')
+        {
+          incParam = false;
+          incValue = true;
+          i++;
+        }
+        else if(argsStr[i] == '&')
+        {
+          paramArray[param.toInt()] = value.toInt();
+          
+          param = "";
+          value = "";
+          incParam = true;
+          incValue = false;
+          i++;
+        }
+        if(incParam)
+        {
+          param += argsStr[i]; 
+        }
+        else if(incValue)
+        {
+          value += argsStr[i];
+        }
+      }
+      if(param != "" && value != "")
+      {
+        paramArray[param.toInt()] = value.toInt();
+      }
+      printArray();
+    }
+  }
+}
 
 void handleClient()
 {
@@ -129,6 +183,10 @@ void handleClient()
 
           // if the current line is blank, you got two newline characters in a row.
           // that's the end of the client HTTP request, so send a response:
+          //Serial.println(currentLine);
+          parseArgs(currentLine);
+          //printArray();
+          
           if (currentLine.length() == 0) {
             // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
             // and a content-type so the client knows what's coming, then a blank line:
@@ -140,7 +198,10 @@ void handleClient()
             //client.print("Click <a href=\"/H\">here</a> to turn ON the LED.<br>");
             //client.print("Click <a href=\"/L\">here</a> to turn OFF the LED.<br>");
             client.print(message);
-            Serial.println(message);
+            if(message != "")
+            {
+              Serial.println(message);
+            }
             message = "";
             
             // The HTTP response ends with another blank line:
@@ -150,7 +211,8 @@ void handleClient()
           } else {    // if you got a newline, then clear currentLine:
             currentLine = "";
           }
-        } else if (c != '\r') {  // if you got anything else but a carriage return character,
+        } 
+        else if (c != '\r') {  // if you got anything else but a carriage return character,
           currentLine += c;      // add it to the end of the currentLine
         }
 
@@ -171,6 +233,8 @@ void handleClient()
     }
   }
 }
+
+
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(115200);
@@ -189,6 +253,7 @@ void setup() {
   Serial.println(myIP);
   server.begin();
   Serial.println("Server started");
+
 }
 
 
