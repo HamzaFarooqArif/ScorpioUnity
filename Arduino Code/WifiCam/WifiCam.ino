@@ -161,6 +161,8 @@ void loop()
 {
   if(WiFi.status() != WL_CONNECTED)
   {
+    Serial.println("Restarting...");
+    delay(1000);
     ESP.restart();
   }
 

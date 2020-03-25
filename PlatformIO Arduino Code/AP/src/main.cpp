@@ -14,7 +14,7 @@ tcpip_adapter_sta_list_t adapter_sta_list;
 char* message = "";
 
 const int chCount = 9;
-int paramArray[chCount] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+int paramArray[chCount] = {85, 85, 0, 0, 0, 0, 0, 0, 0};
 int pinsArray[chCount] = {15, 2, 4, 16, 17, 5, 18, 19, 21};
 
 #define LEDC_TIMER_13_BIT  13
@@ -144,7 +144,9 @@ void parseArgs(String str)
         }
         else if(argsStr[i] == '&')
         {
-          paramArray[param.toInt()] = value.toInt();
+          if(value.toInt() > 180) paramArray[param.toInt()] = 180;
+          else if(value.toInt() < 0) paramArray[param.toInt()] = 0;
+          else paramArray[param.toInt()] = value.toInt();
           
           param = "";
           value = "";
@@ -163,7 +165,10 @@ void parseArgs(String str)
       }
       if(param != "" && value != "")
       {
-        paramArray[param.toInt()] = value.toInt();
+        if(value.toInt() > 180) paramArray[param.toInt()] = 180;
+        else if(value.toInt() < 0) paramArray[param.toInt()] = 0;
+        else paramArray[param.toInt()] = value.toInt();
+          
       }
       writeServoValue();
       printArray();
