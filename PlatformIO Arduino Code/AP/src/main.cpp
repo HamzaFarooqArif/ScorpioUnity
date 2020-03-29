@@ -14,13 +14,20 @@ tcpip_adapter_sta_list_t adapter_sta_list;
 char* message = "";
 
 const int chCount = 9;
-int paramArray[chCount] = {85, 85, 0, 0, 0, 0, 0, 0, 0};
+int paramArray[chCount] = {85, 85, 85, 85, 85, 85, 85, 85, 85};
 int pinsArray[chCount] = {15, 2, 4, 16, 17, 5, 18, 19, 21};
 
 #define LEDC_TIMER_13_BIT  13
 #define LEDC_BASE_FREQ     5000
 Servo ch1Servo;
 Servo ch2Servo;
+Servo ch3Servo;
+Servo ch4Servo;
+Servo ch5Servo;
+Servo ch6Servo;
+Servo ch7Servo;
+Servo ch8Servo;
+Servo ch9Servo;
 
 WiFiServer server(80);
 
@@ -36,21 +43,39 @@ void setupServoWrite()
 {
   ch1Servo.setPeriodHertz(50);
   ch2Servo.setPeriodHertz(50);
+  ch3Servo.setPeriodHertz(50);
+  ch4Servo.setPeriodHertz(50);
+  ch5Servo.setPeriodHertz(50);
+  ch6Servo.setPeriodHertz(50);
+  ch7Servo.setPeriodHertz(50);
+  ch8Servo.setPeriodHertz(50);
+  ch9Servo.setPeriodHertz(50);
+  
   ch1Servo.attach(pinsArray[0], 1000, 2000); //ch1Servo.attach(pinsArray[0], 530, 2200);
   ch2Servo.attach(pinsArray[1], 1000, 2000); //ch2Servo.attach(pinsArray[1], 530, 2200);
+  ch3Servo.attach(pinsArray[2], 1000, 2000); //ch3Servo.attach(pinsArray[2], 530, 2200);
+  ch4Servo.attach(pinsArray[3], 1000, 2000); //ch4Servo.attach(pinsArray[2], 530, 2200);
+  ch5Servo.attach(pinsArray[4], 1000, 2000); //ch5Servo.attach(pinsArray[2], 530, 2200);
+  ch6Servo.attach(pinsArray[5], 1000, 2000); //ch6Servo.attach(pinsArray[2], 530, 2200);
+  ch7Servo.attach(pinsArray[6], 1000, 2000); //ch7Servo.attach(pinsArray[2], 530, 2200);
+  ch8Servo.attach(pinsArray[7], 1000, 2000); //ch8Servo.attach(pinsArray[2], 530, 2200);
+  ch9Servo.attach(pinsArray[8], 1000, 2000); //ch9Servo.attach(pinsArray[2], 530, 2200);
 }
 void ledcAnalogWrite(uint8_t channel, uint32_t value, uint32_t valueMax = 255) {
   uint32_t duty = (8191 / valueMax) * min(value, valueMax);
   ledcWrite(channel, duty);
 }
-void printArray()
+String printArray()
 {
+  String result = "";
   for(int i = 0; i < chCount; i++)
     {
-      String result = String(paramArray[i]);
-      Serial.print(result + " ");
+      String temp = String(paramArray[i]);
+      result += temp + " ";
+      Serial.print(temp + " ");
     }
     Serial.println();
+    return result;
 }
 void writeValue()
 {
@@ -63,6 +88,13 @@ void writeServoValue()
 {
   ch1Servo.write(paramArray[0]);
   ch2Servo.write(paramArray[1]);
+  ch3Servo.write(paramArray[2]);
+  ch4Servo.write(paramArray[3]);
+  ch5Servo.write(paramArray[4]);
+  ch6Servo.write(paramArray[5]);
+  ch7Servo.write(paramArray[6]);
+  ch8Servo.write(paramArray[7]);
+  ch9Servo.write(paramArray[8]);
 }
 void refreshStaList()
 {
@@ -115,7 +147,7 @@ char* getCameraIp()
   }
   return result;
 }
-void parseArgs(String str)
+bool parseArgs(String str)
 {
   if(str.startsWith("GET /?"))
   {
@@ -171,9 +203,20 @@ void parseArgs(String str)
           
       }
       writeServoValue();
-      printArray();
+      return true;
     }
   }
+  return false;
+}
+
+char* stringToChars(String str)
+{
+  char p[str.length()];
+  int i; 
+  for (i = 0; i < sizeof(p); i++) { 
+      p[i] = str[i];  
+  }
+  return p;
 }
 
 void handleClient()
@@ -192,7 +235,11 @@ void handleClient()
           // if the current line is blank, you got two newline characters in a row.
           // that's the end of the client HTTP request, so send a response:
           //Serial.println(currentLine);
-          parseArgs(currentLine);
+          if(parseArgs(currentLine))
+          {
+            
+          }
+          message = stringToChars(printArray());
           //printArray();
           
           if (currentLine.length() == 0) {
@@ -237,6 +284,9 @@ void handleClient()
           
           message = getCameraIp();
         }
+        else if (currentLine.endsWith("GET /restartmain")) {
+          ESP.restart();
+        }
       }
     }
   }
@@ -271,7 +321,6 @@ void loop() {
   //printStaList(); 
   //delay(1000);
   handleClient();
-  
     // close the connection:
     //client.stop();
     //Serial.println("Client Disconnected.");

@@ -1,0 +1,10 @@
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\WindowsFormsApp.exe.config
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\WindowsFormsApp.exe
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\WindowsFormsApp.pdb
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.csprojAssemblyReference.cache
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.Form1.resources
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.Properties.Resources.resources
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.csproj.GenerateResource.cache
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.exe
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.pdb
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.Form_DigitalControl.resources
