@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
 namespace WindowsFormsApp.Utilities
@@ -12,13 +8,76 @@ namespace WindowsFormsApp.Utilities
     class Channel
     {
         public int idx;
-        public int zeroVal;
-        public int maxVal;
-        public int minVal;
+        private int currentVal;
+        private int maxVal;
+        private int minVal;
+        private int zeroVal;
+        public int CurrentVal 
+        {
+            get
+            {
+                return currentVal;
+            }
+            set
+            {
+                if (value >= 0 && value <= 180)
+                {
+                    currentVal = value;
+                    shouldSend = true;
+                }
+            }
+        }
+        public int MaxVal
+        {
+            get
+            {
+                return maxVal;
+            }
+            set
+            {
+                if (value >= 0 && value <= 180)
+                {
+                    maxVal = value;
+                }
+            }
+        }
+        public int MinVal
+        {
+            get
+            {
+                return minVal;
+            }
+            set
+            {
+                if (value >= 0 && value <= 180)
+                {
+                    minVal = value;
+                }
+            }
+        }
+        public int ZeroVal 
+        {
+            get
+            {
+                return zeroVal;
+            }
+            set
+            {
+                if (value >= 0 && value <= 180)
+                {
+                    zeroVal = value;
+                }
+            }
+        }
+
+        public bool shouldSend;
+
         public Channel(int idx)
         {
             this.idx = idx;
-            zeroVal = 85;
+            shouldSend = false;
+            CurrentVal = 85;
+            ZeroVal = 85;
             maxVal = 180;
             minVal = 0;
         }
@@ -26,7 +85,6 @@ namespace WindowsFormsApp.Utilities
     class CentralClass
     {
         private static CentralClass _instance;
-        private Timer timer;
         public string mainBoardIP;
         public bool isConnected;
         public List<Channel> channels;
@@ -42,6 +100,7 @@ namespace WindowsFormsApp.Utilities
         private CentralClass()
         {
             mainBoardIP = "192.168.4.1";
+            isConnected = false;
             channels = new List<Channel>();
             channels.Add(new Channel(0));
             channels.Add(new Channel(1));
@@ -60,10 +119,34 @@ namespace WindowsFormsApp.Utilities
             }
         }
 
-        public string ExecChannel(int channel, int value)
+        public bool setChannelVal(int channelIdx, int value)
         {
-            string url = "http://" + mainBoardIP + "/?" + channel + "=" + value;
-            return ExecURL(url);
+            if (channelIdx < 0 || channelIdx > channels.Count - 1) return false;
+            if (value < 0 || value > 180 || channels[channelIdx].CurrentVal == value) return false;
+            channels[channelIdx].CurrentVal = value;
+            return true;
+        }
+
+        public string ExecChannels()
+        {
+            bool shouldSend = false;
+            string url = "http://" + mainBoardIP + "/?";
+
+            for(int i = 0; i < channels.Count; i++)
+            {
+                if(channels[i].shouldSend)
+                {
+                    url += channels[i].idx + "=" + channels[i].CurrentVal + "&";
+                    channels[i].shouldSend = false;
+                    shouldSend = true;
+                }
+            }
+            url = url.Remove(url.Length - 1, 1);
+            if(shouldSend)
+            {
+                return ExecURL(url);
+            }
+            return "Already Updated";
         }
         public string ExecURL(string url)
         {
@@ -77,12 +160,12 @@ namespace WindowsFormsApp.Utilities
                 isConnected = true;
                 return result.StatusCode.ToString();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 request.Abort();
                 isConnected = false;
                 return ex.Message;
-            } 
+            }
         }
 
         public bool validateIp(string ipAddr)

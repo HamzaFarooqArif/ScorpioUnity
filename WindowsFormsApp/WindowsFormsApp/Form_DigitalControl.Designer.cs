@@ -43,6 +43,7 @@
             this.btn_fwd.Text = "Forward";
             this.btn_fwd.UseVisualStyleBackColor = true;
             this.btn_fwd.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_fwd_MouseDown);
+            this.btn_fwd.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_fwd_MouseUp);
             // 
             // btn_bwd
             // 
@@ -52,7 +53,8 @@
             this.btn_bwd.TabIndex = 1;
             this.btn_bwd.Text = "Backward";
             this.btn_bwd.UseVisualStyleBackColor = true;
-            this.btn_bwd.Click += new System.EventHandler(this.btn_bwd_Click);
+            this.btn_bwd.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_bwd_MouseDown);
+            this.btn_bwd.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_bwd_MouseUp);
             // 
             // btn_left
             // 
@@ -62,6 +64,8 @@
             this.btn_left.TabIndex = 2;
             this.btn_left.Text = "Left";
             this.btn_left.UseVisualStyleBackColor = true;
+            this.btn_left.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_left_MouseDown);
+            this.btn_left.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_left_MouseUp);
             // 
             // btn_right
             // 
@@ -71,6 +75,8 @@
             this.btn_right.TabIndex = 3;
             this.btn_right.Text = "Right";
             this.btn_right.UseVisualStyleBackColor = true;
+            this.btn_right.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_right_MouseDown);
+            this.btn_right.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_right_MouseUp);
             // 
             // Form_DigitalControl
             // 

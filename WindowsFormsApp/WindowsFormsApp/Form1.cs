@@ -24,16 +24,6 @@ namespace WindowsFormsApp
             updateControls();
         }
 
-        private void btn_fwd_Click(object sender, EventArgs e)
-        {
-            CentralClass.getInstance().ExecChannel(0, 0);
-        }
-
-        private void btn_bwd_Click(object sender, EventArgs e)
-        {
-            CentralClass.getInstance().ExecChannel(0, 180);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
