@@ -58,6 +58,7 @@ namespace WindowsFormsApp.Forms
             if (!num_Max.Focused) num_Max.Value = CentralClass.getInstance().channels[idx].MaxVal;
             if (!num_Min.Focused) num_Min.Value = CentralClass.getInstance().channels[idx].MinVal;
             if (!num_zero.Focused) num_zero.Value = CentralClass.getInstance().channels[idx].ZeroVal;
+            if (!trk_channel.Focused) trk_channel.Value = CentralClass.getInstance().channels[idx].CurrentVal;
         }
 
         private void num_Max_KeyDown(object sender, KeyEventArgs e)
@@ -109,6 +110,14 @@ namespace WindowsFormsApp.Forms
             CentralClass.getInstance().channels[idx].MaxVal = Config.load("ChannelControl" + idx + "Max");
             CentralClass.getInstance().channels[idx].MinVal = Config.load("ChannelControl" + idx + "Min");
             CentralClass.getInstance().channels[idx].ZeroVal = Config.load("ChannelControl" + idx + "Mid");
+        }
+
+        private void trk_channel_ValueChanged(object sender, EventArgs e)
+        {
+            if(trk_channel.Focused && CentralClass.getInstance().isConnected)
+            {
+                CentralClass.getInstance().channels[idx].CurrentVal = trk_channel.Value;
+            }
         }
     }
 }

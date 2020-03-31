@@ -16,3 +16,8 @@ C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\W
 C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.Forms.ChannelControl.resources
 C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\BrandonPotter.XBox.dll
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\SharpDX.dll
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\SharpDX.XInput.dll
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\SharpDX.xml
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\SharpDX.XInput.xml

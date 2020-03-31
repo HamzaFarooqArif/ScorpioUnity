@@ -32,12 +32,15 @@ namespace WindowsFormsApp.Forms
             {
                 FLP_ChannelControls.Controls.Add(ChannelControl.getInstance(FLP_ChannelControls.Controls.Count));
             }
+            timer.Interval = 100;
             timer.Start();
             loadSettings();
         }
         private void timer_Tick(object sender, EventArgs e)
         {
-
+            if (!CentralClass.getInstance().isConnected) return;
+            CentralClass.getInstance().ExecChannels();
+            
         }
         private void appendControl(UserControl childControl)
         {

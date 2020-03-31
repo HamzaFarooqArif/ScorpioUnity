@@ -127,14 +127,6 @@ namespace WindowsFormsApp.Utilities
             }
         }
 
-        public bool setChannelVal(int channelIdx, int value)
-        {
-            if (channelIdx < 0 || channelIdx > channels.Count - 1) return false;
-            if (value < 0 || value > 180 || channels[channelIdx].CurrentVal == value) return false;
-            channels[channelIdx].CurrentVal = value;
-            return true;
-        }
-
         public string ExecChannels()
         {
             bool shouldSend = false;
@@ -152,7 +144,10 @@ namespace WindowsFormsApp.Utilities
             url = url.Remove(url.Length - 1, 1);
             if(shouldSend)
             {
-                return ExecURL(url);
+                new System.Threading.Thread(delegate () {
+                    ExecURL(url);
+                }).Start();
+                return "Executed"; 
             }
             return "Already Updated";
         }

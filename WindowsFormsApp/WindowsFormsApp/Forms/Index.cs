@@ -25,6 +25,9 @@ namespace WindowsFormsApp
             timer1.Interval = 1000;
             timer1.Start();
             updateControls();
+
+            Channel_CP.getInstance().Hide();
+            Form_DigitalControl.getInstance().Hide();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -66,7 +69,6 @@ namespace WindowsFormsApp
                 new System.Threading.Thread(delegate () {
                     CentralClass.getInstance().updateStatus();
                 }).Start();
-                //CentralClass.getInstance().updateStatus();
             }
 
             if (CentralClass.getInstance().isConnected)

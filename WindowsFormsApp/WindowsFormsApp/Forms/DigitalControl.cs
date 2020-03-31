@@ -124,44 +124,34 @@ namespace WindowsFormsApp
 
         private void forward()
         {
-            CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[0].idx, CentralClass.getInstance().channels[0].MaxVal);
-            CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[1].idx, CentralClass.getInstance().channels[1].MaxVal);
-            new System.Threading.Thread(delegate () {
-                CentralClass.getInstance().ExecChannels();
-            }).Start();
-            
+            CentralClass.getInstance().channels[0].CurrentVal = CentralClass.getInstance().channels[0].MaxVal;
+            CentralClass.getInstance().channels[1].CurrentVal = CentralClass.getInstance().channels[1].MaxVal;
+
+
         }
         private void backward()
         {
-            CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[0].idx, CentralClass.getInstance().channels[0].MinVal);
-            CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[1].idx, CentralClass.getInstance().channels[1].MinVal);
-            new System.Threading.Thread(delegate () {
-                CentralClass.getInstance().ExecChannels();
-            }).Start();
+            CentralClass.getInstance().channels[0].CurrentVal = CentralClass.getInstance().channels[0].MinVal;
+            CentralClass.getInstance().channels[1].CurrentVal = CentralClass.getInstance().channels[1].MinVal;
+
         }
         private void left()
         {
-            CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[0].idx, CentralClass.getInstance().channels[0].MaxVal);
-            CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[1].idx, CentralClass.getInstance().channels[1].MinVal);
-            new System.Threading.Thread(delegate () {
-                CentralClass.getInstance().ExecChannels();
-            }).Start();
+            CentralClass.getInstance().channels[0].CurrentVal = CentralClass.getInstance().channels[0].MaxVal;
+            CentralClass.getInstance().channels[1].CurrentVal = CentralClass.getInstance().channels[1].MinVal;
+
         }
         private void right()
         {
-            CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[0].idx, CentralClass.getInstance().channels[0].MinVal);
-            CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[1].idx, CentralClass.getInstance().channels[1].MaxVal);
-            new System.Threading.Thread(delegate () {
-                CentralClass.getInstance().ExecChannels();
-            }).Start();
+            CentralClass.getInstance().channels[0].CurrentVal = CentralClass.getInstance().channels[0].MinVal;
+            CentralClass.getInstance().channels[1].CurrentVal = CentralClass.getInstance().channels[1].MaxVal;
+
         }
         private void stop()
         {
-            CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[0].idx, CentralClass.getInstance().channels[0].ZeroVal);
-            CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[1].idx, CentralClass.getInstance().channels[1].ZeroVal);
-            new System.Threading.Thread(delegate () {
-                CentralClass.getInstance().ExecChannels();
-            }).Start();
+            CentralClass.getInstance().channels[0].CurrentVal = CentralClass.getInstance().channels[0].ZeroVal;
+            CentralClass.getInstance().channels[1].CurrentVal = CentralClass.getInstance().channels[1].ZeroVal;
+
         }
 
         private void btn_left_MouseDown(object sender, MouseEventArgs e)
