@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DebugTools.Tools;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp.Forms;
 using WindowsFormsApp.Utilities;
 
 namespace WindowsFormsApp
@@ -16,6 +18,7 @@ namespace WindowsFormsApp
         public Form1()
         {
             InitializeComponent();
+            Inspector inspector = new Inspector();
 
             CentralClass.getInstance().updateStatus();
             tb_mainBoardIP.Text = CentralClass.getInstance().mainBoardIP;
@@ -41,6 +44,7 @@ namespace WindowsFormsApp
                 if (CentralClass.getInstance().validateIp(tb_mainBoardIP.Text))
                 {
                     CentralClass.getInstance().mainBoardIP = tb_mainBoardIP.Text;
+                    e.SuppressKeyPress = true;
                 }
                 else
                 {
@@ -48,6 +52,7 @@ namespace WindowsFormsApp
                     MessageBox.Show("Invalid IP Address");
                 }
             }
+            
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -58,7 +63,10 @@ namespace WindowsFormsApp
         {
             if (!CentralClass.getInstance().isConnected)
             {
-                CentralClass.getInstance().updateStatus();
+                new System.Threading.Thread(delegate () {
+                    CentralClass.getInstance().updateStatus();
+                }).Start();
+                //CentralClass.getInstance().updateStatus();
             }
 
             if (CentralClass.getInstance().isConnected)
@@ -83,6 +91,23 @@ namespace WindowsFormsApp
             {
                 Form_DigitalControl.getInstance().Show();
             }
+        }
+
+        private void btn_chControl_Click(object sender, EventArgs e)
+        {
+            if (Channel_CP.getInstance().Visible)
+            {
+                Channel_CP.getInstance().Hide();
+            }
+            else
+            {
+                Channel_CP.getInstance().Show();
+            }
+        }
+
+        private void btn_Restart_Click(object sender, EventArgs e)
+        {
+            CentralClass.getInstance().RestartBoard();
         }
     }
 }

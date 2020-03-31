@@ -126,31 +126,42 @@ namespace WindowsFormsApp
         {
             CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[0].idx, CentralClass.getInstance().channels[0].MaxVal);
             CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[1].idx, CentralClass.getInstance().channels[1].MaxVal);
-            CentralClass.getInstance().ExecChannels();
+            new System.Threading.Thread(delegate () {
+                CentralClass.getInstance().ExecChannels();
+            }).Start();
+            
         }
         private void backward()
         {
             CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[0].idx, CentralClass.getInstance().channels[0].MinVal);
             CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[1].idx, CentralClass.getInstance().channels[1].MinVal);
-            CentralClass.getInstance().ExecChannels();
+            new System.Threading.Thread(delegate () {
+                CentralClass.getInstance().ExecChannels();
+            }).Start();
         }
         private void left()
         {
             CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[0].idx, CentralClass.getInstance().channels[0].MaxVal);
             CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[1].idx, CentralClass.getInstance().channels[1].MinVal);
-            CentralClass.getInstance().ExecChannels();
+            new System.Threading.Thread(delegate () {
+                CentralClass.getInstance().ExecChannels();
+            }).Start();
         }
         private void right()
         {
             CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[0].idx, CentralClass.getInstance().channels[0].MinVal);
             CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[1].idx, CentralClass.getInstance().channels[1].MaxVal);
-            CentralClass.getInstance().ExecChannels();
+            new System.Threading.Thread(delegate () {
+                CentralClass.getInstance().ExecChannels();
+            }).Start();
         }
         private void stop()
         {
             CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[0].idx, CentralClass.getInstance().channels[0].ZeroVal);
             CentralClass.getInstance().setChannelVal(CentralClass.getInstance().channels[1].idx, CentralClass.getInstance().channels[1].ZeroVal);
-            CentralClass.getInstance().ExecChannels();
+            new System.Threading.Thread(delegate () {
+                CentralClass.getInstance().ExecChannels();
+            }).Start();
         }
 
         private void btn_left_MouseDown(object sender, MouseEventArgs e)
@@ -186,6 +197,15 @@ namespace WindowsFormsApp
             {
                 stop();
                 isKeyExecuted = false;
+            }
+        }
+
+        private void Form_DigitalControl_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
             }
         }
     }

@@ -7,6 +7,7 @@ namespace WindowsFormsApp.Utilities
 {
     class Channel
     {
+        public static int channelCount = 9;
         public int idx;
         private int currentVal;
         private int maxVal;
@@ -105,6 +106,13 @@ namespace WindowsFormsApp.Utilities
             channels.Add(new Channel(0));
             channels.Add(new Channel(1));
             channels.Add(new Channel(2));
+            channels.Add(new Channel(3));
+            channels.Add(new Channel(4));
+            channels.Add(new Channel(5));
+            channels.Add(new Channel(6));
+            channels.Add(new Channel(7));
+            channels.Add(new Channel(8));
+            channels.Add(new Channel(9));
         }
         public void updateStatus()
         {
@@ -147,6 +155,11 @@ namespace WindowsFormsApp.Utilities
                 return ExecURL(url);
             }
             return "Already Updated";
+        }
+        public void RestartBoard()
+        {
+            string url = "http://" + mainBoardIP + "/restartmain";
+            ExecURL(url);
         }
         public string ExecURL(string url)
         {

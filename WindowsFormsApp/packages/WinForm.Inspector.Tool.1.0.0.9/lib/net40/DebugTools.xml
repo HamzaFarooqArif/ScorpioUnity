@@ -1,0 +1,502 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DebugTools</name>
+    </assembly>
+    <members>
+        <member name="T:DebugTools.Enums.SkipProperty">
+            <summary>
+            Used to adjust the search settings for the inspector
+            </summary>
+        </member>
+        <member name="F:DebugTools.Enums.SkipProperty.None">
+            <summary>
+             Does not skip any child controls.
+            </summary>
+        </member>
+        <member name="F:DebugTools.Enums.SkipProperty.Invisible">
+            <summary>
+            Skips invisible child controls.
+            </summary>
+        </member>
+        <member name="F:DebugTools.Enums.SkipProperty.Disabled">
+            <summary>
+             Skips disabled child controls.
+            </summary>
+        </member>
+        <member name="F:DebugTools.Enums.SkipProperty.Transparent">
+            <summary>
+            Skips transparent child controls.
+            </summary>
+        </member>
+        <member name="T:DebugTools.Enums.DocumentOutlineLayout">
+            <summary>
+            Used to layout the document outline.
+            </summary>
+        </member>
+        <member name="F:DebugTools.Enums.DocumentOutlineLayout.None">
+            <summary>Displays only the name of the control</summary>
+        </member>
+        <member name="F:DebugTools.Enums.DocumentOutlineLayout.Short">
+            <summary>Displays the name and the type of the control</summary>
+        </member>
+        <member name="F:DebugTools.Enums.DocumentOutlineLayout.Full">
+            <summary>Displays the name and the fullname of the control</summary>
+        </member>
+        <member name="F:DebugTools.Forms.Overlay.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:DebugTools.Forms.Overlay.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:DebugTools.Forms.Overlay.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:DebugTools.Forms.ControlView">
+            <summary>
+            Display all the data about the current Control.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Forms.ControlView.ExpandAll">
+            <summary>
+            Expand or collapse all nodes in the document outline by default.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Forms.ControlView.InspectNodeKey">
+            <summary>
+            Activates the inspector in the document outline.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Forms.ControlView.DocumentOutlineLayout">
+            <summary>
+            Controls the layout for the document outline component.
+            </summary>
+        </member>
+        <member name="M:DebugTools.Forms.ControlView.#ctor(DebugTools.Tools.Inspector)">
+            <summary>
+            Display all the data about the current Control.
+            </summary>
+            <param name="inspector"></param>
+        </member>
+        <member name="F:DebugTools.Forms.ControlView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:DebugTools.Forms.ControlView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:DebugTools.Forms.ControlView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:DebugTools.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ArrowDown">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.BackgroundWorker">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.BindingNavigator">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.BindingSource">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.Button">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.CheckBox">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.CheckboxCheckAll">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.CheckboxClearAll">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.CheckedListBox">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.CollapseAll">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ColorDialog">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ComboBox">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ContextMenuStrip">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.DataGridView">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.DateTimePicker">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.DocumentOutline">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.DomainUpDown">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.Event">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ExpandAll">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.FlowLayoutPanel">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.FolderBrowserDialog">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.FontDialog">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.Form">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.GroupBox">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.HelpProvider">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.HScrollBar">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ImageList">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.Label">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.LinkLabel">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ListBox">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ListView">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.MainMenu">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.MaskedTextBox">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.MenuStrip">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.MonthCalendar">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.NumericUpDown">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.OpenFileDialog">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.PageSetupDialog">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.Panel">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.PictureBox">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.PrintDialog">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.PrintDocument">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.PrintPreviewControl">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.PrintPreviewDialog">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ProgressBar">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.RadioButton">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.RichTextBox">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.SaveFileDialog">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.Separater">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.SplitButton">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.SplitContainer">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.Splitter">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.StatusInformation">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.StatusStrip">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.TabControl">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.TableLayoutPanel">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.TextBox">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.Timer">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ToolBar">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ToolStrip">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ToolStripContainer">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.ToolTip">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.TrackBar">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.TreeView">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.UpDownButtons">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.UserControl">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.VScrollBar">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Properties.Resources.WebBrowser">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="T:DebugTools.Tools.Inspector">
+            <summary>
+            <para>This component can be used to inspect controls in Windows Forms.</para>
+            <para>Press "Ctrl + F8" to open the Control View. Hold down "Alt" and move the mouse over the control you want to inspect.</para>
+            <para>NB: The keys can be changed be the properties "OpenControlViewKey" and "ActivateKey"</para>
+            </summary>
+        </member>
+        <member name="P:DebugTools.Tools.Inspector.ControlView">
+            <summary>
+            Show the information about the control.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Tools.Inspector.InspectKey">
+            <summary>
+            Is used to activate the inspector.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Tools.Inspector.OpenControlViewKey">
+            <summary>
+            Is used to open the Control View.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Tools.Inspector.IgnoreTypes">
+            <summary>
+            The inspector will ignore these types.
+            </summary>
+        </member>
+        <member name="P:DebugTools.Tools.Inspector.SkipProperties">
+            <summary>
+            Specifies which control settings to skip.
+            </summary>
+        </member>
+        <member name="M:DebugTools.Tools.Inspector.#ctor">
+            <summary>
+            <para>This component can be used to inspect controls in Windows Forms.</para>
+            <para>Press "Ctrl + F8" to open the Control View. Hold down "Alt" and move the mouse over the control you want to inspect.</para>
+            <para>NB: The keys can be changed be the properties "OpenControlViewKey" and "ActivateKey"</para>
+            </summary>
+        </member>
+    </members>
+</doc>

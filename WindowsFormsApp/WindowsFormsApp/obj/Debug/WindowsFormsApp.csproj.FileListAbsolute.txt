@@ -8,3 +8,11 @@ C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\W
 C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.exe
 C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.pdb
 C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.Form_DigitalControl.resources
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.Forms.Channel_CP.resources
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\DebugTools.dll
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\Gma.System.MouseKeyHook.dll
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\DebugTools.xml
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.csproj.CopyComplete
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\obj\Debug\WindowsFormsApp.Forms.ChannelControl.resources
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Acer\Documents\ScorpioUnity\WindowsFormsApp\WindowsFormsApp\bin\Debug\Newtonsoft.Json.xml
