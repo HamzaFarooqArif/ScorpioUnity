@@ -3,6 +3,7 @@
 #include <WiFi.h>
 
 #define LED_BUILTIN 4
+const int LED_1 = 33;
 
 const char* WIFI_SSID = "esp32";
 const char* WIFI_PASS = "12345678";
@@ -111,6 +112,7 @@ void flashOff()
 void setup()
 {
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode (LED_1, OUTPUT);
   Serial.begin(115200);
   Serial.println();
 
@@ -134,7 +136,18 @@ void setup()
   Serial.print(WIFI_SSID);  
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
-    delay(500);
+    digitalWrite(LED_1, 1);
+    delay(100);
+    digitalWrite(LED_1, 0);
+    delay(100);
+    digitalWrite(LED_1, 1);
+    delay(100);
+    digitalWrite(LED_1, 0);
+    delay(100);
+    digitalWrite(LED_1, 1);
+    delay(100);
+    digitalWrite(LED_1, 0);
+    delay(100);
   }
   Serial.println(".");
 
@@ -159,12 +172,13 @@ void setup()
 
 void loop()
 {
+  digitalWrite(LED_1, 0);
   if(WiFi.status() != WL_CONNECTED)
   {
     Serial.println("Restarting...");
     delay(1000);
     ESP.restart();
   }
-
   server.handleClient();
+  digitalWrite(LED_1, 1);
 }
