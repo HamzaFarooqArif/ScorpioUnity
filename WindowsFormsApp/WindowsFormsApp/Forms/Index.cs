@@ -28,6 +28,7 @@ namespace WindowsFormsApp
 
             Channel_CP.getInstance().Hide();
             Form_DigitalControl.getInstance().Hide();
+            CameraPanel.getInstance().Hide();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -110,6 +111,18 @@ namespace WindowsFormsApp
         private void btn_Restart_Click(object sender, EventArgs e)
         {
             CentralClass.getInstance().RestartBoard();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(CameraPanel.getInstance().Visible)
+            {
+                CameraPanel.getInstance().Hide();
+            }
+            else
+            {
+                CameraPanel.getInstance().Show();
+            }
         }
     }
 }

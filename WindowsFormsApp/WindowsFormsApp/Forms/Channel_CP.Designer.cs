@@ -33,8 +33,8 @@
             this.FLP_ChannelControls = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_save = new System.Windows.Forms.Button();
             this.btn_load = new System.Windows.Forms.Button();
+            this.btn_save = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -84,17 +84,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(520, 33);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
-            // btn_save
-            // 
-            this.btn_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_save.Location = new System.Drawing.Point(263, 5);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(124, 23);
-            this.btn_save.TabIndex = 0;
-            this.btn_save.Text = "Save Settings";
-            this.btn_save.UseVisualStyleBackColor = true;
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
-            // 
             // btn_load
             // 
             this.btn_load.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -106,6 +95,17 @@
             this.btn_load.UseVisualStyleBackColor = true;
             this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
             // 
+            // btn_save
+            // 
+            this.btn_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_save.Location = new System.Drawing.Point(263, 5);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(124, 23);
+            this.btn_save.TabIndex = 0;
+            this.btn_save.Text = "Save Settings";
+            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            // 
             // Channel_CP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -113,7 +113,7 @@
             this.ClientSize = new System.Drawing.Size(520, 462);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Channel_CP";
-            this.Text = "Channel_CP";
+            this.Text = "Channel Control Panel";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Channel_CP_FormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);

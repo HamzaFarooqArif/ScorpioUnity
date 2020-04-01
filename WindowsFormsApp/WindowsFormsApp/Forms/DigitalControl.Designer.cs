@@ -157,7 +157,7 @@
             this.Controls.Add(this.groupBox1);
             this.KeyPreview = true;
             this.Name = "Form_DigitalControl";
-            this.Text = "Form_DigitalControl";
+            this.Text = "Digital Control";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_DigitalControl_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form_DigitalControl_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form_DigitalControl_KeyUp);
