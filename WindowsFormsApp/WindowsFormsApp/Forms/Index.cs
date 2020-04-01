@@ -15,7 +15,13 @@ namespace WindowsFormsApp
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        private static Form1 _instance;
+        public static Form1 getInstance()
+        {
+            if (_instance == null) _instance = new Form1();
+            return _instance;
+        }
+        private Form1()
         {
             InitializeComponent();
             Inspector inspector = new Inspector();
