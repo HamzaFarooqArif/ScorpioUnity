@@ -28,7 +28,7 @@ namespace WindowsFormsApp
 
             CentralClass.getInstance().updateStatus();
             tb_mainBoardIP.Text = CentralClass.getInstance().mainBoardIP;
-            timer1.Interval = 1000;
+            timer1.Interval = CentralClass.getInstance().waitInterval;
             timer1.Start();
             updateControls();
 

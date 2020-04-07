@@ -7,8 +7,8 @@
 #define LED_BUILTIN 2
 
 // Set these to your desired credentials.
-const char *ssid = "esp32";
-const char *password = "12345678";
+const char *ssid = "esp32"; //const char *ssid = "ZONG MBB-E5573-AE26";
+const char *password = "12345678";        //const char *password = "58688303";
 
 tcpip_adapter_sta_list_t adapter_sta_list;
 char* message = "";

@@ -32,7 +32,7 @@ namespace WindowsFormsApp.Forms
             {
                 FLP_ChannelControls.Controls.Add(ChannelControl.getInstance(FLP_ChannelControls.Controls.Count));
             }
-            timer.Interval = 100;
+            timer.Interval = CentralClass.getInstance().refreshInterval;
             timer.Start();
             loadSettings();
         }

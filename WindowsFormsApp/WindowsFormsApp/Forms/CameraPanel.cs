@@ -90,6 +90,7 @@ namespace WindowsFormsApp.Forms
                 if (bitmap != null)
                 {
                     Image<Bgr, Byte> imageCV = new Image<Bgr, byte>(bitmap); //Image Class from Emgu.CV
+                    //CvInvoke.Flip(imageCV, imageCV, Emgu.CV.CvEnum.FlipType.Vertical);
                     frame = imageCV.Mat;
                     ib_Preview.Image = frame;
                     CentralClass.getInstance().isCamConnected = true;
@@ -120,7 +121,7 @@ namespace WindowsFormsApp.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CentralClass.getInstance().queryCamUrl();
+            //CentralClass.getInstance().queryCamUrl();
             CentralClass.getInstance().updateCamStatus();
         }
 

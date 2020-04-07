@@ -41,7 +41,7 @@ namespace WindowsFormsApp.Forms
             idx = _instance.Count;
             groupBox9.Text = "Channel " + (idx + 1);
             timer = new Timer();
-            timer.Interval = 100;
+            timer.Interval = CentralClass.getInstance().refreshInterval;
             timer.Tick += timer_Tick;
             timer.Start();
         }

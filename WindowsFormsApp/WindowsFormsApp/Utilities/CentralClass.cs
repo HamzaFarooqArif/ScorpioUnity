@@ -101,6 +101,8 @@ namespace WindowsFormsApp.Utilities
         public List<Channel> channels;
         private string camIp;
         public List<string> infoArray;
+        public int refreshInterval;
+        public int waitInterval;
         public string CamIp
         {
             get
@@ -141,6 +143,8 @@ namespace WindowsFormsApp.Utilities
             camIp = infoArray[1];
             isConnected = false;
             isCamConnected = false;
+            refreshInterval = 100;
+            waitInterval = 2000;
             channels = new List<Channel>();
             channels.Add(new Channel(0));
             channels.Add(new Channel(1));
@@ -229,13 +233,9 @@ namespace WindowsFormsApp.Utilities
         {
             try
             {
-                string url = infoArray[2] + mainBoardIP + infoArray[7];
                 if (isConnected)
                 {
                     new System.Threading.Thread(delegate () {
-                        MyWebClient client = new MyWebClient();
-                        camIp = client.DownloadString(url);
-                        client.Dispose();
                         updateCamStatus();
                     }).Start();
                 }
@@ -247,18 +247,30 @@ namespace WindowsFormsApp.Utilities
         }
         public void updateCamStatus()
         {
-            if(validateIp(camIp))
+            try
             {
-                string result = ExecURL(infoArray[2] + camIp + infoArray[9]);
-                if (result.Equals(infoArray[8]))
+                string url = infoArray[2] + mainBoardIP + infoArray[7];
+                MyWebClient client = new MyWebClient();
+                camIp = client.DownloadString(url);
+                client.Dispose();   
+                if (validateIp(camIp))
                 {
-                    isCamConnected = true;
-                }
-                else
-                {
-                    isCamConnected = false;
+                    string result = ExecURL(infoArray[2] + camIp + infoArray[9]);
+                    if (result.Equals(infoArray[8]))
+                    {
+                        isCamConnected = true;
+                    }
+                    else
+                    {
+                        isCamConnected = false;
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+
+            }
+            
         }
     }
 }

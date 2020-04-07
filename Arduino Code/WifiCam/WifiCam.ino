@@ -2,11 +2,11 @@
 #include <WebServer.h>
 #include <WiFi.h>
 
-#define LED_BUILTIN 4
-const int LED_1 = 33;
+#define LED_BUILTIN 33
+const int FLASH_LED = 4;
 
-const char* WIFI_SSID = "esp32";
-const char* WIFI_PASS = "12345678";
+const char* WIFI_SSID = "esp32";      //const char* WIFI_SSID = "ZONG MBB-E5573-AE26"; 
+const char* WIFI_PASS = "12345678";   //const char* WIFI_PASS = "58688303";            
 
 WebServer server(80);
 
@@ -101,18 +101,18 @@ void handleMjpeg()
 
 void flashOn()
 {
-  digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(FLASH_LED, HIGH);
 }
 
 void flashOff()
 {
-  digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(FLASH_LED, LOW);
 }
 
 void setup()
 {
-  pinMode(LED_BUILTIN, OUTPUT);
-  pinMode (LED_1, OUTPUT);
+  pinMode (LED_BUILTIN, OUTPUT);
+  pinMode(FLASH_LED, OUTPUT);
   Serial.begin(115200);
   Serial.println();
 
@@ -136,17 +136,17 @@ void setup()
   Serial.print(WIFI_SSID);  
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
-    digitalWrite(LED_1, 1);
+    digitalWrite(LED_BUILTIN, 1);
     delay(100);
-    digitalWrite(LED_1, 0);
+    digitalWrite(LED_BUILTIN, 0);
     delay(100);
-    digitalWrite(LED_1, 1);
+    digitalWrite(LED_BUILTIN, 1);
     delay(100);
-    digitalWrite(LED_1, 0);
+    digitalWrite(LED_BUILTIN, 0);
     delay(100);
-    digitalWrite(LED_1, 1);
+    digitalWrite(LED_BUILTIN, 1);
     delay(100);
-    digitalWrite(LED_1, 0);
+    digitalWrite(LED_BUILTIN, 0);
     delay(100);
   }
   Serial.println(".");
@@ -172,7 +172,7 @@ void setup()
 
 void loop()
 {
-  digitalWrite(LED_1, 0);
+  digitalWrite(LED_BUILTIN, 0);
   if(WiFi.status() != WL_CONNECTED)
   {
     Serial.println("Restarting...");
@@ -180,5 +180,5 @@ void loop()
     ESP.restart();
   }
   server.handleClient();
-  digitalWrite(LED_1, 1);
+  digitalWrite(LED_BUILTIN, 1);
 }
